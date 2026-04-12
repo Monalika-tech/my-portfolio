@@ -457,6 +457,41 @@
             font-weight: bold;
             cursor: pointer;
         }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                align-items: center;
+                display: none;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                color: white;
+                padding: 10px 0;
+            }
+        }
     </style>
 </head>
 
@@ -473,6 +508,9 @@
                 <li><a href="#education">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </nav>
 
@@ -641,7 +679,7 @@
             <div class="certificates-list">
                 <!-- Office Automation -->
                 <div class="certificate-item">
-                    <h3 class="certificate-title" data-img="src/COA.jpEg">Office Automation</h3>
+                    <h3 class="certificate-title" data-img="src/COA.jpeg">Office Automation</h3>
                     <p>Learned computer fundamentals and Windows, MS Office (Word, Excel, PowerPoint), and typing
                         (English & Punjabi) | 2023</p>
                 </div>
@@ -817,16 +855,34 @@
             }
         }
 
+        // toggle navigation for mobile
+        const toggleBtn = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+
+        toggleBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
 
         // Add scroll effect to navigation
         window.addEventListener('scroll', function () {
             const nav = document.querySelector('nav');
+            const links = document.querySelectorAll('.nav-links a');
+            const logo = document.querySelector('.logo');
+            const toggle = document.querySelector('.menu-toggle');
+
             if (window.scrollY > 100) {
-                nav.style.background = 'rgba(255, 255, 255, 0.95)';
-                nav.style.color = '#333';
+                nav.style.background = 'white';
+
+                links.forEach(link => link.style.color = '#333');
+                logo.style.color = '#333';
+                toggle.style.color = '#333';
+
             } else {
                 nav.style.background = 'rgba(255, 255, 255, 0.1)';
-                nav.style.color = 'white';
+
+                links.forEach(link => link.style.color = 'white');
+                logo.style.color = 'white';
+                toggle.style.color = 'white';
             }
         });
     </script>
